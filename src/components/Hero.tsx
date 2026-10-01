@@ -98,6 +98,7 @@ export const Hero: React.FC<HeroProps> = ({ onShopClick, heroImage, brandConfig 
                 <img
                   src={displayImage}
                   alt="Superwoman's Hub Founder with Oil Perfume Collection"
+                  decoding="async"
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                   referrerPolicy="no-referrer"
                   onError={(e) => {

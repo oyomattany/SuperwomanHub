@@ -75,10 +75,17 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({
           {/* Large Product Image */}
           <div className="relative bg-[#F4ECE2] aspect-square md:aspect-auto h-72 md:h-full overflow-hidden flex flex-col items-center justify-center">
             <img
-              src={perfume.image}
+              src={perfume.image || '/product-placeholder.svg'}
               alt={`${perfume.name} Oil Perfume`}
+              decoding="async"
               className="w-full h-full object-cover object-center"
               referrerPolicy="no-referrer"
+              onError={(e) => {
+                const target = e.currentTarget;
+                if (target.src !== window.location.origin + '/product-placeholder.svg') {
+                  target.src = '/product-placeholder.svg';
+                }
+              }}
             />
             <span className="absolute top-4 left-4 bg-[#FAF7F2]/95 backdrop-blur-xs text-[#5A1224] text-[10px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full border border-[#E3D3C4]">
               {perfume.category}

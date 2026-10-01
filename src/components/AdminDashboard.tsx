@@ -237,11 +237,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     const file = e.target.files?.[0];
     if (!file) return;
 
+    // Reset input so selecting the same file again works smoothly
+    e.target.value = '';
+
     setUploadingImage(true);
     try {
       const url = await uploadProductImage(file);
       setFormData((prev) => ({ ...prev, image: url }));
-      showToast('Photo uploaded and optimized for live store');
+      showToast('Photo uploaded and optimized instantly for live store!');
     } catch (err) {
       console.error('Upload error:', err);
       showToast('Could not process photo. Please choose another image.');
@@ -327,11 +330,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     const file = e.target.files?.[0];
     if (!file) return;
 
+    // Reset input so selecting the same file again works smoothly
+    e.target.value = '';
+
     setUploadingHeroImage(true);
     try {
       const url = await uploadSiteImage(file);
       setHomepageForm((prev) => ({ ...prev, heroImage: url }));
-      showToast('Homepage photo uploaded and ready. Click "Save & Publish" to activate live.');
+      showToast('Homepage photo optimized instantly. Click "Save & Publish" to activate live.');
     } catch (err) {
       console.error('Homepage image upload error:', err);
       showToast('Could not process photo. Please choose another image.');

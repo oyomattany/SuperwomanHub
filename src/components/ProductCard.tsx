@@ -22,10 +22,18 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       {/* Product Image Area */}
       <div className="relative aspect-square w-full bg-[#FAF5EE] overflow-hidden">
         <img
-          src={perfume.image}
+          src={perfume.image || '/product-placeholder.svg'}
           alt={perfume.name}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
           referrerPolicy="no-referrer"
+          onError={(e) => {
+            const target = e.currentTarget;
+            if (target.src !== window.location.origin + '/product-placeholder.svg') {
+              target.src = '/product-placeholder.svg';
+            }
+          }}
         />
 
         {/* Category Pill */}
