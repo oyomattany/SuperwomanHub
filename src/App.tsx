@@ -565,20 +565,20 @@ export function App() {
         onOrderSubmitted={handleRecordCartOrder}
       />
 
-      {/* 6. Floating WhatsApp Button for Quick Inquiries */}
+      {/* 6. Floating WhatsApp Button for Quick Inquiries (Moved to left hand side) */}
       <a
         href={`https://wa.me/${brandConfig.whatsappNumber}`}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat with Superwoman's Hub on WhatsApp"
-        className="fixed bottom-5 right-5 z-40 p-3.5 bg-[#25D366] hover:bg-[#20BA5A] text-white rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center cursor-pointer hover:scale-105"
+        className="fixed bottom-5 left-5 z-40 p-3.5 bg-[#25D366] hover:bg-[#20BA5A] text-white rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center justify-center cursor-pointer hover:scale-105"
       >
         <MessageCircle className="w-6 h-6" />
       </a>
 
       {/* 7. Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 left-6 z-50 bg-[#5A1224] text-[#FAF7F2] border border-[#7A1D34] px-4 py-2.5 rounded-2xl shadow-xl text-xs font-medium flex items-center gap-2 animate-fadeIn">
+        <div className="fixed bottom-6 right-6 z-50 bg-[#5A1224] text-[#FAF7F2] border border-[#7A1D34] px-4 py-2.5 rounded-2xl shadow-xl text-xs font-medium flex items-center gap-2 animate-fadeIn">
           <Sparkles className="w-4 h-4 text-[#E5C365] flex-shrink-0" />
           <span>{toastMessage}</span>
         </div>
