@@ -18,6 +18,7 @@ import {
   uploadProductImage,
   uploadSiteImage,
   logoutAdmin,
+  AUTHORIZED_ADMIN_EMAILS,
 } from '../lib/firebase';
 import { BRAND_MEDIA_LIBRARY } from '../utils/adminStorage';
 import {
@@ -1192,6 +1193,56 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               >
                 Edit Homepage Image →
               </button>
+            </div>
+
+            {/* Authorized Admin Team Card */}
+            <div className="bg-white rounded-2xl border border-[#E8DDD2] p-5 sm:p-6 shadow-xs">
+              <div className="flex items-center justify-between pb-3 border-b border-[#E8DDD2] mb-4">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-[#FAF3EC] border border-[#E8DDD2] flex items-center justify-center text-[#5A1224]">
+                    <Sparkles className="w-4 h-4 text-[#C59E3F]" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-serif font-bold text-[#5A1224]">
+                      Authorized Administrators
+                    </h3>
+                    <p className="text-[11px] text-[#8C7A6B]">
+                      Accounts with full management access to products, orders, and store settings.
+                    </p>
+                  </div>
+                </div>
+                <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#E8F5E9] text-[#2E7D32] border border-[#2E7D32]/30">
+                  {AUTHORIZED_ADMIN_EMAILS.length} Active Admins
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {AUTHORIZED_ADMIN_EMAILS.map((emailItem) => {
+                  const isCurrent = adminEmail?.toLowerCase() === emailItem.toLowerCase();
+                  return (
+                    <div
+                      key={emailItem}
+                      className={`p-3.5 rounded-xl border flex items-center justify-between gap-2 transition-all ${
+                        isCurrent
+                          ? 'bg-[#FAF3EC] border-[#5A1224] ring-1 ring-[#5A1224]/30'
+                          : 'bg-[#FAF7F2] border-[#D9C8BA]'
+                      }`}
+                    >
+                      <div className="min-w-0">
+                        <p className="text-xs font-semibold text-[#2D2825] truncate">
+                          {emailItem}
+                        </p>
+                        <p className="text-[10px] text-[#8C7A6B] mt-0.5">
+                          {isCurrent ? 'Signed In (Current Session)' : 'Full Admin Privileges'}
+                        </p>
+                      </div>
+                      <div className="w-5 h-5 rounded-full bg-[#2E7D32]/15 text-[#2E7D32] flex items-center justify-center flex-shrink-0">
+                        <Check className="w-3 h-3" />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
 
           </div>

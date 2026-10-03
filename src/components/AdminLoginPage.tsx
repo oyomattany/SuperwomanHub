@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Lock, Mail, Eye, EyeOff, AlertCircle, ArrowLeft, KeyRound } from 'lucide-react';
-import { loginAdmin } from '../lib/firebase';
+import { loginAdmin, AUTHORIZED_ADMIN_EMAILS } from '../lib/firebase';
 
 interface AdminLoginPageProps {
   onLoginSuccess: () => void;
@@ -11,7 +11,7 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({
   onLoginSuccess,
   onBackToHome,
 }) => {
-  const [email, setEmail] = useState('oyomattany@gmail.com');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -92,7 +92,20 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({
               <KeyRound className="w-4 h-4 flex-shrink-0 mt-0.5 text-[#C59E3F]" />
               <div className="leading-relaxed">
                 <span className="font-semibold block mb-0.5">Admin Access Help</span>
-                Use your registered email <strong>oyomattany@gmail.com</strong> and designated password.
+                Use any designated administrator email:
+                <ul className="mt-1 list-disc list-inside space-y-0.5 font-medium text-[#2D2825]">
+                  {AUTHORIZED_ADMIN_EMAILS.map((adminEmail) => (
+                    <li key={adminEmail}>
+                      <button
+                        type="button"
+                        onClick={() => setEmail(adminEmail)}
+                        className="text-[#5A1224] hover:underline"
+                      >
+                        {adminEmail}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           )}
@@ -114,7 +127,7 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="oyomattany@gmail.com"
+                  placeholder="e.g. tessybest180@gmail.com"
                   autoComplete="email"
                   className="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#D9C8BA] text-sm text-[#2D2825] focus:outline-none focus:border-[#5A1224] focus:ring-1 focus:ring-[#5A1224] transition-all placeholder:text-[#A89A8E]"
                 />

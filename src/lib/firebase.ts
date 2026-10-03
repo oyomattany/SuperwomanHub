@@ -60,19 +60,23 @@ function notifyAuthListeners(user: AdminUser | null) {
 }
 
 /**
- * Validates admin credentials directly for MVP without requiring
- * external Firebase Console Authentication setup.
- *
- * Designated Admin:
- * Email: oyomattany@gmail.com
- * Password: Admin123sh
+ * Authorized admin accounts with management privileges:
+ * - oyomattany@gmail.com
+ * - tessybest180@gmail.com
+ * - xzybytt@gmail.com
  */
+export const AUTHORIZED_ADMIN_EMAILS: string[] = [
+  'oyomattany@gmail.com',
+  'tessybest180@gmail.com',
+  'xzybytt@gmail.com',
+];
+
 export async function loginAdmin(email: string, pass: string): Promise<AdminUser> {
   const cleanEmail = email.trim().toLowerCase();
   const cleanPass = pass.trim();
 
-  // Validate admin email and password (also tolerating casing variants)
-  const isEmailValid = cleanEmail === 'oyomattany@gmail.com';
+  // Validate admin email against authorized administrator list
+  const isEmailValid = AUTHORIZED_ADMIN_EMAILS.includes(cleanEmail);
   const isPassValid =
     cleanPass === 'Admin123sh' ||
     cleanPass === 'admin123sh' ||
@@ -83,8 +87,8 @@ export async function loginAdmin(email: string, pass: string): Promise<AdminUser
   }
 
   const user: AdminUser = {
-    email: 'oyomattany@gmail.com',
-    uid: 'admin-oyomattany',
+    email: cleanEmail,
+    uid: `admin-${cleanEmail.replace(/[^a-zA-Z0-9]/g, '_')}`,
   };
 
   try {
